@@ -3,19 +3,14 @@
 #TODO:Сделать рефакторинг!
 import requests , bs4
 from kivy.app import App
-from kivy.config import Config
-
+import config
 #Импорт виджетов
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.label import Label
 from kivy.uix.textinput import TextInput
 from kivy.uix.button import Button
-#Настройки экрана
-Config.set('graphics','width',320)
-Config.set('graphics','height',480)
-Config.set('graphics','resizable',0)
-
-
+#Импортирование настроек экрана
+conf = config.Conf()
 class ParserApp(App):
     def parse(self,url_input):
             #TODO:Добавить алгортм парсинга
@@ -27,7 +22,7 @@ class ParserApp(App):
             self.tit = self.b.select('h1')
             
             self.filename = self.tit[0].getText()
-            with open(self.filename.strip() + '.txt','w') as f:
+            with open('Chords/'+ self.filename.strip() + '.txt','w') as f:
                 f.write(self.text)
     def build(self):
         self.bl = BoxLayout(orientation = 'vertical')
