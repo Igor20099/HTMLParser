@@ -24,8 +24,10 @@ class ParserApp(App):
             self.tag = self.tag_input.text
             self.p = self.b.select(self.tag)
             self.text = self.p[0].getText()
-            self.filename = self.filename_input.text
-            with open(self.filename + '.txt','w') as f:
+            self.tit = self.b.select('h1')
+            
+            self.filename = self.tit[0].getText()
+            with open(self.filename.strip() + '.txt','w') as f:
                 f.write(self.text)
     def build(self):
         self.bl = BoxLayout(orientation = 'vertical')
